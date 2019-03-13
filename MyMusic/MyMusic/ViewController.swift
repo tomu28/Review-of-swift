@@ -44,6 +44,29 @@ class ViewController: UIViewController {
         }
     }
     
+    let backmusicPath = Bundle.main.bundleURL.appendingPathComponent("backmusic.mp3")
+    var backmusicPlayer = AVAudioPlayer()
+    
+    @IBAction func play(_ sender: Any) {
+        do {
+            backmusicPlayer = try AVAudioPlayer(contentsOf: backmusicPath, fileTypeHint: nil
+            )
+            
+            // リピート再生
+            backmusicPlayer.numberOfLoops = -1
+            backmusicPlayer.play()
+            
+        } catch{
+            print("エラーが発生しました！")
+        }
+    }
+    
+    @IBAction func stop(_ sender: Any) {
+    
+        backmusicPlayer.stop()
+        
+    }
+    
     
 }
 
