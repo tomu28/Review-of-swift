@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -14,7 +15,35 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    
+    let cymbalPath = Bundle.main.bundleURL.appendingPathComponent("cymbal.mp3")
+    var cymbalPlayer = AVAudioPlayer()
 
+    @IBAction func cymbal(_ sender: Any) {
+    
+        do {
+        cymbalPlayer = try AVAudioPlayer(contentsOf: cymbalPath, fileTypeHint: nil)
+        
+        cymbalPlayer.play()
+        } catch {
+            print("シンバルで、エラーが発生しました！")
+        }
+    }
 
+    let guitarPath = Bundle.main.bundleURL.appendingPathComponent("guitar.mp3")
+    var guitarPlayer = AVAudioPlayer()
+    
+    
+    @IBAction func guitar(_ sender: Any) {
+        do {
+            guitarPlayer = try AVAudioPlayer(contentsOf: guitarPath, fileTypeHint: nil)
+            guitarPlayer.play()
+        } catch {
+            print("ギターで、エラーが発生しました!")
+        }
+    }
+    
+    
 }
 
