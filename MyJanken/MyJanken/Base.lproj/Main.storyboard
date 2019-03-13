@@ -41,6 +41,9 @@
                                 <state key="normal" title="じゃんけんをする">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="shuffleAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4bw-1X-Dbg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.80431292808219179" green="0.99248180650684936" blue="0.63928724315068497" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -58,6 +61,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="answerImageView" destination="AwM-P6-5ei" id="MeI-Vr-2gj"/>
+                        <outlet property="answerLabel" destination="dJP-39-1G6" id="GUD-Yi-MAY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
