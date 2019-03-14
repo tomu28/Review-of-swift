@@ -34,6 +34,35 @@ class EffectViewController: UIViewController {
     var originalImage : UIImage?
     
     @IBAction func effectButtonAction(_ sender: Any) {
+        
+        // エフェクト前画像をアンラップしてエフェクト用画像として取り出す
+        if let image = originalImage {
+            
+            let filterName = "CIPhotoEffectMono"
+            // 元画像の回転角度を取得
+            let rotate = image.imageOrientation
+            
+            let inputImage = CIImage(image: image)
+            
+            guard let effectFileter = CIFilter(name: filterName) else {
+                return
+            }
+            effectFileter.setDefaults()
+            effectFileter.setValue(inputImage, forKey: kCIInputImageKey)
+            
+            guard let outputImage = effectFileter.outputImage else {
+                return
+            }
+            
+            let ciContext = CIContext(options: nil)
+            
+            guard let cgImage = ciContext.createCGImage(outputImage, from: outputImage.extent) else {
+                return
+            }
+            
+            effectImage.image = UIImage(cgImage: cgImage, scale: 1.0, orientation: rotate)
+        }
+        
     }
     
     @IBAction func shareButtonAction(_ sender: Any) {
