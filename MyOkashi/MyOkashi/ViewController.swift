@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SafariServices
 
-class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,8 +19,10 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         searchText.delegate = self
         
         searchText.placeholder = "お菓子の名前を入力してください"
-        
         tableView.dataSource = self
+        
+        // TableViewのdelegateを設定
+        tableView.delegate = self
     }
 
     @IBOutlet weak var searchText: UISearchBar!
@@ -121,6 +124,19 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let safariViewController = SFSafariViewController(url: okashiList[indexPath.row].link)
+        
+        safariViewController.delegate = self
+        present(safariViewController, animated: true, completion: nil)
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true, completion: nil)
+    }
     
 }
 
