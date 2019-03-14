@@ -30,6 +30,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         if let searchKey = textField.text {
             print(searchKey)
+            
+            let geocoder = CLGeocoder()
+            
+            geocoder.geocodeAddressString(searchKey, completionHandler: {(placemarks, error) in
+                
+                if let unwrapPlacemarks = placemarks {
+                    
+                    // 1件目の情報を取り出す
+                    if let firstPlacemark = unwrapPlacemarks.first {
+                        
+                        // 位置情報を取り出す
+                        if let location = firstPlacemark.location {
+                            
+                            // 位置情報から緯度経度をtargetCoordinateに取り出す
+                            let targetCoordinate = location.coordinate
+                            
+                            print(targetCoordinate)
+                        }
+                    }
+                }
+            })
+            
         }
         return true
     }
