@@ -73,6 +73,11 @@ class EffectViewController: UIViewController {
             let controller = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
             controller.popoverPresentationController?.sourceView = view
             
+            // シェアボタンの情報を取得
+            let button = sender as! UIButton
+            // シェアボタンの表示位置を設定(シェアボタンの上に表示される)
+            controller.popoverPresentationController?.sourceRect = button.frame
+            
             present(controller, animated: true, completion: nil)
         }
     }
