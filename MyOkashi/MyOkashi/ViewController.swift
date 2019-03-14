@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UISearchBarDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,10 +18,15 @@ class ViewController: UIViewController, UISearchBarDelegate {
         searchText.delegate = self
         
         searchText.placeholder = "お菓子の名前を入力してください"
+        
+        tableView.dataSource = self
     }
 
     @IBOutlet weak var searchText: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    
+    // お菓子のリスト(タプル配列)
+    var okashiList : [(name: String, maker: String, link : URL, image: URL)] = []
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         // キーボードを閉じる
@@ -42,7 +47,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     struct ResultJson: Codable {
-        let item:[ItemJson]
+        let item:[ItemJson]?
     }
     
     func searchOkashi(keyword : String) {
@@ -69,7 +74,27 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 let decoder = JSONDecoder()
                 let json = try decoder.decode(ResultJson.self, from: data!)
                 
-                print(json)
+                // print(json)
+                if let items = json.item {
+                    // お菓子のリストを初期化
+                    self.okashiList.removeAll()
+                    
+                    for item in items {
+                        if let name = item.name, let maker = item.maker, let link = item.url, let image = item.image {
+                            
+                            let okashi = (name,maker, link, image)
+                            self.okashiList.append(okashi)
+                        }
+                    }
+                    // TableViewを更新
+                    self.tableView.reloadData()
+                    
+                    if let okashidbg = self.okashiList.first{
+                        print("--------------------")
+                        print("okashiList[0] = \(okashidbg)")
+                    }
+                    
+                }
             } catch {
                 print("エラーが発生しました")
             }
@@ -78,6 +103,24 @@ class ViewController: UIViewController, UISearchBarDelegate {
         task.resume()
         
     }
+    
+    // Cellの総数を返すメソッド
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return okashiList.count
+    }
+    
+    // Cellに値を設定するメソッド
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "okashiCell", for : indexPath)
+        
+        cell.textLabel?.text = okashiList[indexPath.row].name
+        
+        if let imageData = try? Data(contentsOf: okashiList[indexPath.row].image) {
+            cell.imageView?.image = UIImage(data: imageData)
+        }
+        return cell
+    }
+    
     
 }
 
