@@ -47,6 +47,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             let targetCoordinate = location.coordinate
                             
                             print(targetCoordinate)
+                            
+                            // ピンを置く
+                            let pin = MKPointAnnotation()
+                            pin.coordinate = targetCoordinate
+                            pin.title = searchKey
+                            self.dispMap.addAnnotation(pin)
+                            
+                            // 緯度経度を中心に半径500mの範囲を表示
+                            self.dispMap.region = MKCoordinateRegion(center: targetCoordinate, latitudinalMeters: 500.0, longitudinalMeters: 500.0)
+                            
                         }
                     }
                 }
