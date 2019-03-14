@@ -90,11 +90,20 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo
         info: [UIImagePickerController.InfoKey: Any]) {
         
-        pictureImage.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        
-        dismiss(animated: true, completion: nil)
+        captureImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        dismiss(animated: true, completion: {
+            self.performSegue(withIdentifier: "showEffectView", sender: nil)
+        })
     }
     
-    
+    var captureImage : UIImage?
+ 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let nextViewController = segue.destination as? EffectViewController {
+            // 画面遷移時に、取得した画像を渡す
+            nextViewController.originalImage = captureImage
+        }
+    }
 }
 
