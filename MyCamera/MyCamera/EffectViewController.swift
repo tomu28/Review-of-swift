@@ -30,6 +30,30 @@ class EffectViewController: UIViewController {
 
     @IBOutlet weak var effectImage: UIImageView!
     
+    // ファイル名を列挙した配列(Array)
+    // 0.モノクロ
+    // 1.Chrome
+    // 2.Fade
+    // 3.Instant
+    // 4.Noir
+    // 5.Process
+    // 6.Tonal
+    // 7.Transfer
+    // 8.Sepia Tone
+    let filterArray = ["CIPhotoEffectMono",
+                       "CIPhotoEffectChrome",
+                       "CIPhotoEffectFade",
+                       "CIPhotoEffectInstant",
+                       "CIPhotoEffectNoir",
+                       "CIPhotoEffectProcess",
+                       "CIPhotoEffectTonal",
+                       "CIPhotoEffectTransfer",
+                       "CISepiaTone"
+    ]
+    
+    // 選択中のエフェクト添字
+    var filterSelectNumber = 0
+    
     // エフェクト前画像
     var originalImage : UIImage?
     
@@ -38,7 +62,19 @@ class EffectViewController: UIViewController {
         // エフェクト前画像をアンラップしてエフェクト用画像として取り出す
         if let image = originalImage {
             
-            let filterName = "CIPhotoEffectMono"
+            // ファイル名を指定
+            let filterName = filterArray[filterSelectNumber]
+            
+            // 次の選択するエフェクト添字に更新
+            filterSelectNumber += 1
+            // 添字の配列の数と同じか？チャック
+            if filterSelectNumber == filterArray.count {
+                // 同じ場合は最後まで選択されたので先頭に戻す
+                filterSelectNumber = 0
+                
+            }
+            
+            
             // 元画像の回転角度を取得
             let rotate = image.imageOrientation
             
