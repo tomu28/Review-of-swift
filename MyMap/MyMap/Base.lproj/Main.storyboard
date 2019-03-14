@@ -30,12 +30,20 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IeN-Y9-VxU">
                                 <rect key="frame" x="0.0" y="50" width="375" height="617"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Yg-Nt-G8C">
+                                <rect key="frame" x="337" y="637" width="22" height="22"/>
+                                <connections>
+                                    <action selector="changeMapButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Go-AK-k6h"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4Yg-Nt-G8C" secondAttribute="trailing" constant="16" id="3HE-SN-UUF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qHW-rj-UQ7" secondAttribute="trailing" id="7Yw-ET-FOG"/>
                             <constraint firstItem="qHW-rj-UQ7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MpS-sj-KMB"/>
                             <constraint firstItem="IeN-Y9-VxU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Qgm-uR-Ujf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4Yg-Nt-G8C" secondAttribute="bottom" constant="8" id="XDz-g3-Sjh"/>
                             <constraint firstItem="IeN-Y9-VxU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="adZ-tF-uEV"/>
                             <constraint firstItem="qHW-rj-UQ7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="dkd-0r-3sM"/>
                             <constraint firstItem="IeN-Y9-VxU" firstAttribute="top" secondItem="qHW-rj-UQ7" secondAttribute="bottom" id="ors-xd-PSD"/>
