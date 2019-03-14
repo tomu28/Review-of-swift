@@ -82,6 +82,15 @@ class ViewController: UIViewController {
         if displayUpdate() <= 0 {
             count = 0
             timer.invalidate()
+
+            // ダイアログを表示
+                // 下からスライドして表示される。　　preferredStyle: .alert  とすると、ホップアップするダイアログが表示される
+            let alertController = UIAlertController(title: "終了", message: "タイマー終了時間です", preferredStyle: .actionSheet)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            present(alertController, animated: true, completion: nil)
+            
+            
         }
     }
     
