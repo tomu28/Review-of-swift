@@ -33,6 +33,18 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     }
     
     @IBAction func SNSButtonAction(_ sender: Any) {
+        
+        if let shareImage = pictureImage.image {
+            
+            let shareItems = [shareImage]
+            let controller = UIActivityViewController(activityItems: shareItems,
+                                                         applicationActivities: nil)
+            
+            // iPadで落ちてしまう対策
+            controller.popoverPresentationController?.sourceView = view
+            
+            present(controller, animated: true, completion: nil)
+        }
     }
     
     
