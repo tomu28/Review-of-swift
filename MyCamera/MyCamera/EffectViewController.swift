@@ -66,6 +66,15 @@ class EffectViewController: UIViewController {
     }
     
     @IBAction func shareButtonAction(_ sender: Any) {
+        
+        if let shareImage = effectImage.image {
+            
+            let shareItems = [shareImage]
+            let controller = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+            controller.popoverPresentationController?.sourceView = view
+            
+            present(controller, animated: true, completion: nil)
+        }
     }
     
     
